@@ -31,8 +31,12 @@ public class ArcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double speed = m_joystick.getRawAxis(Config.kLeftY)*kSpeedMultiplier;
-    double turn = m_joystick.getRawAxis(Config.kRightX)*kTurnMultiplier;
+    double speed = m_joystick.getRawAxis(Config.kLeftY)*Config.kSpeedMultiplier;
+    double turn = m_joystick.getRawAxis(Config.kRightX)*Config.kTurnMultiplier;
+    double left = speed + turn;
+    double right = speed - turn;
+    m_drivetrain.setLeftSpeed(left);
+    m_drivetrain.setRightSpeed(right);
   }
 
   // Called once the command ends or is interrupted.

@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 public class Drivetrain extends SubsystemBase {
-  private static class Config {
+  private static final class Config {
     public static final int kRightPrimaryMotorID = 1;
     public static final int kLeftPrimaryMotorID = 2;
     public static final int kRightSecondaryMotorID = 3;
