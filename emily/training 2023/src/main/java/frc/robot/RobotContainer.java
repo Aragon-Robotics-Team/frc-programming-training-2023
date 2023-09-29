@@ -7,7 +7,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.ArcadeElevator;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Elevator;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -22,6 +24,8 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private Joystick m_joystick = new Joystick(Config.kJoystickPort);
   private Drivetrain m_drivetrain = new Drivetrain();
+  private Elevator m_elevator = new Elevator();
+  private ArcadeElevator m_arcadeElevator = new ArcadeElevator(m_joystick, m_elevator);
   private ArcadeDrive m_arcadeDrive = new ArcadeDrive(m_joystick, m_drivetrain);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -52,6 +56,7 @@ public class RobotContainer {
   }
   public Command getTeleopCommand() {
     m_drivetrain.setDefaultCommand(m_arcadeDrive);
+    //m_elevator.schedule(m_arcadeElevator);
     return null;
   }
 }
