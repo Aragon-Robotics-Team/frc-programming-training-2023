@@ -6,7 +6,9 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.ArcadeElevator;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Elevator;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -25,6 +27,8 @@ public class RobotContainer {
   private Drivetrain m_drivetrain = new Drivetrain();
   private Joystick m_joystick = new Joystick(Config.kJoystickPort);
   private ArcadeDrive m_arcadeDrive = new ArcadeDrive(m_joystick, m_drivetrain);
+  private Elevator m_elevator = new Elevator();
+  private ArcadeElevator m_arcadeElevator = new ArcadeElevator(m_joystick, m_elevator);
   // The robot's subsystems and commands are defined here...
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -62,6 +66,7 @@ public class RobotContainer {
 
   public Command getTeleopCommand(){
     m_drivetrain.setDefaultCommand(m_arcadeDrive);
+    m_arcadeElevator.schedule();
     return null;
   }
 }

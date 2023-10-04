@@ -4,23 +4,12 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Elevator;
 
-public class ArcadeElevator extends CommandBase {
-  private static class Config{
-    public static final int kSecondaryY = 2;
-    public static final double kSpeedMultiplier = 0.4;
-  }
-
-  private Joystick m_joystick;
-  private Elevator m_elevator;
-
-  /** Creates a new ArcadeElevator. */
-  public ArcadeElevator(Joystick joystick, Elevator elevator) {
-    m_joystick = joystick;
-    m_elevator = elevator;
+public class ElevatorMoveForTime extends CommandBase {
+  /** Creates a new ElevatorMoveForTime. */
+  public ElevatorMoveForTime() {
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
@@ -29,9 +18,7 @@ public class ArcadeElevator extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    m_elevator.setSpeed(m_joystick.getRawAxis(Config.kSecondaryY)*Config.kSpeedMultiplier);
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
