@@ -4,12 +4,24 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Drivetrain;
 
 public class ArcadeDrive extends CommandBase {
+  private static final class Config{
+    public static final int kLeftY = 1;
+    public static final int kRightX = 4;
+    public static final double kSpeedMultiplier = 0.4;
+    public static final double kTurnMultiplier = 0.4;
+  }
   /** Creates a new ArcadeDrive. */
-  public ArcadeDrive() {
-    // Use addRequirements() here to declare subsystem dependencies.
+  private Joystick m_joystick;
+  private Drivetrain m_drivetrain;
+  public ArcadeDrive(Joystick joystick, Drivetrain drivetrain) {
+    m_drivetrain = drivetrain;
+    m_joystick = joystick;
+    addRequirements(m_drivetrain);
   }
 
   // Called when the command is initially scheduled.
@@ -18,7 +30,14 @@ public class ArcadeDrive extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    double speed = m_joystick.getRawAxis(Config.kLeftY)*Config.kSpeedMultiplier;
+    double turn = m_joystick.getRawAxis(Config.kRightX)*Config.kTurnMultiplier;
+    double left = speed + turn;
+    double right = speed - turn;
+    m_drivetrain.setLeftSpeed(left);
+    m_drivetrain.setRightSpeed(right);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
