@@ -62,13 +62,12 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    m_ElevatorMoveForTime.schedule();
-    return null;
+    return m_ElevatorMoveForTime;
   }
 
   public Command getTeleopCommand(){
     m_drivetrain.setDefaultCommand(m_arcadeDrive);
-    m_arcadeElevator.schedule();
+    m_elevator.setDefaultCommand(m_arcadeElevator);
     return null;
   }
 }
