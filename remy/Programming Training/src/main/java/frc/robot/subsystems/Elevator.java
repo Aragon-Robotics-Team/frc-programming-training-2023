@@ -25,7 +25,7 @@ public class Elevator extends SubsystemBase {
     
   }
   
-  public void SetSpeed(double speed) {
+  public void setSpeed(double speed) {
     m_elevator.set(ControlMode.PercentOutput, speed);
   }
 

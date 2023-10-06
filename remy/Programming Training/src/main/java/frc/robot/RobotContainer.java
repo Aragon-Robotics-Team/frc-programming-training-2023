@@ -7,11 +7,13 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.ArcadeElevator;
+import frc.robot.commands.ElevatorMoveForTime;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
@@ -22,13 +24,16 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   private static final class Config{
-    public static final int port = 0; 
+    public static final int kPort = 0; 
+    public static final int kJoystickButtonPort = 1;
   }
-  private Joystick m_joystick = new Joystick(Config.port);
+  private Joystick m_joystick = new Joystick(Config.kPort);
   private Drivetrain m_driveTrain = new Drivetrain();
   private Elevator m_elevator = new Elevator();
   private ArcadeElevator m_arcadeElevator = new ArcadeElevator(m_joystick, m_elevator);
   private ArcadeDrive m_arcadeDrive = new ArcadeDrive(m_joystick, m_driveTrain);
+  private ElevatorMoveForTime m_elevatorMoveForTime = new ElevatorMoveForTime(m_elevator, 0.5, 0.1);
+  private JoystickButton m_elevatorMoveForTimeButton = new JoystickButton(m_joystick, Config.kJoystickButtonPort);
   
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -48,6 +53,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
 
+    m_elevatorMoveForTimeButton.onTrue(m_elevatorMoveForTime);
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
    }
