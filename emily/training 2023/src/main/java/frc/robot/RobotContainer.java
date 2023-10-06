@@ -56,7 +56,7 @@ public class RobotContainer {
   }
   public Command getTeleopCommand() {
     m_drivetrain.setDefaultCommand(m_arcadeDrive);
-    //m_elevator.schedule(m_arcadeElevator);
+    m_arcadeElevator.schedule();
     return null;
   }
 }
