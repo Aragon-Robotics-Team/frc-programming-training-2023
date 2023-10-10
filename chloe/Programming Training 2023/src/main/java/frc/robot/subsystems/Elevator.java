@@ -3,15 +3,9 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.IdleMode;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class Elevator extends SubsystemBase {
   private static final class Config{
@@ -25,13 +19,13 @@ public class Elevator extends SubsystemBase {
     
   }
   
-  public void SetSpeed(double speed) {
+  public void setSpeed(double speed) {
     m_elevator.set(ControlMode.PercentOutput, speed);
   }
 
-  public void SetNeutralMode(IdleMode neutralMode) {
+  // public void SetNeutralMode(IdleMode neutralMode) {
     
-  }
+  // }
 
 
 
