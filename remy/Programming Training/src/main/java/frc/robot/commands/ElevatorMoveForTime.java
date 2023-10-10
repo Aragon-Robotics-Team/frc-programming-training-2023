@@ -28,6 +28,7 @@ public class ElevatorMoveForTime extends CommandBase {
     m_produceSpeed = produceSpeed;
     m_timeInSeconds = timeInSeconds;
     m_timer = new Timer();
+    
 
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -35,14 +36,14 @@ public class ElevatorMoveForTime extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    k_startTime = m_timer.get();
-
+    m_timer.reset();
+    m_timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_timer.get() - k_startTime < m_timeInSeconds && m_elvatorUpperLimitSwitch.get() == false){
+    if (m_timer.hasElapsed(m_timeInSeconds) == false && m_elvatorUpperLimitSwitch.get() == false){
       m_elevator.setSpeed(m_produceSpeed);
     }
     else {
@@ -57,6 +58,6 @@ public class ElevatorMoveForTime extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_elvatorUpperLimitSwitch.get();
+    return m_elvatorUpperLimitSwitch.get() || m_timer.hasElapsed(m_timeInSeconds);
   }
 }

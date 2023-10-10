@@ -28,11 +28,11 @@ public class Elevator extends SubsystemBase {
   public void setSpeed(double speed) {
     m_elevator.set(ControlMode.PercentOutput, speed);
   }
-
+/**
   public void SetNeutralMode(IdleMode neutralMode) {
     
   }
-
+*/
 
 
   @Override
