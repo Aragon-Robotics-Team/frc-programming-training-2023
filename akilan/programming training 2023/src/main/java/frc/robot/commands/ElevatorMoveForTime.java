@@ -13,11 +13,12 @@ public class ElevatorMoveForTime extends CommandBase {
   private static final class Config { 
     public static final int kTopSwitchChannel = 0;
   }
+
+  private Timer m_timer = new Timer();
   private Elevator m_elevator;
   private DigitalInput m_topSwitch = new DigitalInput(Config.kTopSwitchChannel);
   private double m_speed;
   private double m_timeInSeconds;
-  private double m_startingTime;
 
   public ElevatorMoveForTime(Elevator elevator, double speed, double time) {
     m_elevator = elevator;
@@ -30,13 +31,16 @@ public class ElevatorMoveForTime extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_startingTime = Timer.getFPGATimestamp();
+    m_timer.reset();
+    m_timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_elevator.setSpeed(m_speed);
+    if (!m_topSwitch.get() && !(m_timer.get() > m_timeInSeconds)){
+      m_elevator.setSpeed(m_speed);
+    }
   }
   // Called once the command ends or is interrupted.
   @Override
@@ -47,6 +51,6 @@ public class ElevatorMoveForTime extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (m_topSwitch.get() || (Timer.getFPGATimestamp() - m_startingTime > m_timeInSeconds));
+    return (m_topSwitch.get() || (m_timer.get() > m_timeInSeconds));
   }
 }

@@ -32,7 +32,7 @@ public class RobotContainer {
   private ArcadeDrive m_arcadeDrive = new ArcadeDrive(m_joystick, m_drivetrain);
   private Elevator m_elevator = new Elevator();
   private ArcadeElevator m_arcadeElevator = new ArcadeElevator(m_joystick, m_elevator);
-  private ElevatorMoveForTime m_elevatorMoveForTime = new ElevatorMoveForTime(m_elevator, 0.5, 2);
+  private ElevatorMoveForTime m_elevatorMoveForTime = new ElevatorMoveForTime(m_elevator, 0.2, 1);
   private JoystickButton m_elevatorButton = new JoystickButton(m_joystick, Config.kJoystickButtonPort);
   // The robot's subsystems and commands are defined here...
 
@@ -62,7 +62,7 @@ public class RobotContainer {
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
-   * @return the command to run in autonomous
+   * @return the command to run in autonomous 
    */
   public Command getAutonomousCommand() {
     return m_elevatorMoveForTime;
