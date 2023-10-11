@@ -21,7 +21,7 @@ import frc.robot.subsystems.Elevator;
  */
 public class RobotContainer {
   private static final class Config {
-    public static final int kJoystickPort = 1;
+    public static final int kJoystickPort = 0;
     public static final int kElevatorButton = 1;
   }
   // The robot's subsystems and commands are defined here...
@@ -30,7 +30,7 @@ public class RobotContainer {
   private Elevator m_elevator = new Elevator();
   private ArcadeElevator m_arcadeElevator = new ArcadeElevator(m_joystick, m_elevator);
   private ArcadeDrive m_arcadeDrive = new ArcadeDrive(m_joystick, m_drivetrain);
-  private ElevatorMoveForTime m_elevatorMoveForTime = new ElevatorMoveForTime(m_elevator, 0.2, 1);
+  private ElevatorMoveForTime m_elevatorMoveForTime = new ElevatorMoveForTime(m_elevator, -0.2, 1);
   private JoystickButton m_elevatorMoveForTimeButton = new JoystickButton(m_joystick, Config.kElevatorButton);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
