@@ -29,6 +29,12 @@ public class Drivetrain extends SubsystemBase {
     m_rightPrimary.setInverted(true);
     m_rightSecondary.setInverted(true);
   }
+  public double getLeftEncoderPosition(){
+    return m_leftPrimary.getSelectedSensorPosition();
+  }
+  public double getRightEncoderPosition(){
+    return m_rightPrimary.getSelectedSensorPosition();
+  }
   public void setRightSpeed(double rightSpeed){
     m_rightPrimary.set(rightSpeed);
   }
