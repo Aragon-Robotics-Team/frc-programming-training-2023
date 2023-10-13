@@ -27,6 +27,7 @@ public class ElevatorMoveForTime extends CommandBase {
     m_timeInSeconds = seconds;
     m_timer = new Timer();
     
+    
   }
 
   // Called when the command is initially scheduled.
