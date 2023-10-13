@@ -17,6 +17,7 @@ public class Elevator extends SubsystemBase {
   }
   /** Creates a new Elevator.
    */
+
   private CANSparkMax m_elevator = new CANSparkMax(Config.deviceId, MotorType.kBrushless);
   public Elevator() {}
   

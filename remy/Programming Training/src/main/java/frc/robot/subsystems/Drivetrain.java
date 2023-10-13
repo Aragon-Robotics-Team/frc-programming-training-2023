@@ -48,6 +48,14 @@ public class Drivetrain extends SubsystemBase {
     m_rightSecondary.setNeutralMode(idleMode);
   }
 
+  public double getLeftPosition() {
+    return m_leftPrimary.getSelectedSensorPosition();
+  }
+
+  public double getRightPosition() {
+    return m_rightPrimary.getSelectedSensorPosition();
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
