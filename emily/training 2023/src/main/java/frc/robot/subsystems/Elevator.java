@@ -15,7 +15,7 @@ public class Elevator extends SubsystemBase {
   }
   /** Creates a new Elevator.
    */
-  private TalonSRX m_elevator = new TalonSRX(Config.deviceId);
+  private CANSparkMax m_elevator = new CANSparkMax(Config.deviceId);
   public Elevator() {}
   
   public void setSpeed(double speed) {

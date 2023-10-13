@@ -18,7 +18,7 @@ public class Elevator extends SubsystemBase {
     private static final int deviceId = 5;
   }
   /** Creates a new Elevator. */
-  private TalonSRX m_elevator = new TalonSRX(Config.deviceId);
+  private CANSparkMax m_elevator = new CANSparkMax(Config.deviceId, MotorType.kBrushless);
 
 
   public Elevator() {
@@ -26,7 +26,7 @@ public class Elevator extends SubsystemBase {
   }
   
   public void setSpeed(double speed) {
-    m_elevator.set(ControlMode.PercentOutput, speed);
+    m_elevator.set(speed);
   }
 /**
   public void SetNeutralMode(IdleMode neutralMode) {

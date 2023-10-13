@@ -10,7 +10,7 @@ import frc.robot.subsystems.Elevator;
 
 public class ArcadeElevator extends CommandBase {
   private static final class Config {
-    public static final int kElevatorYAxis = 2;
+    public static final int kElevatorYAxis = 5;
     public static final double kElevatorMultiplier = Math.PI/26;
   }
     private Joystick m_joystick;
