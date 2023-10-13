@@ -43,7 +43,7 @@ public class ElevatorMoveForTime extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if((m_timer.get() - m_startTime) < m_timeInSeconds){
+    if((m_timer.get() - m_startTime) <= m_timeInSeconds){
       m_elevator.setSpeed(m_speed);
     }
   }
@@ -57,7 +57,7 @@ public class ElevatorMoveForTime extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if((m_timer.get() - m_startTime) >= m_timeInSeconds){
+    if((m_timer.get() - m_startTime) > m_timeInSeconds){
       return true;
 
     }
