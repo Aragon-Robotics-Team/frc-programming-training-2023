@@ -6,6 +6,8 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -15,11 +17,11 @@ public class Elevator extends SubsystemBase {
   }
   /** Creates a new Elevator.
    */
-  private TalonSRX m_elevator = new TalonSRX(Config.deviceId);
+  private CANSparkMax m_elevator = new CANSparkMax(Config.deviceId, MotorType.kBrushless);
   public Elevator() {}
   
   public void setSpeed(double speed) {
-    m_elevator.set(ControlMode.PercentOutput, speed);
+    m_elevator.set(speed);
   }
   // public void SetNeutralMode(IdleMode neutralMode) {
 
