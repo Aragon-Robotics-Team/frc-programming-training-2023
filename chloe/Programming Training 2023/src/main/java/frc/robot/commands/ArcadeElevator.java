@@ -31,13 +31,13 @@ public class ArcadeElevator extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_elevator.SetSpeed(m_joystick.getRawAxis(Config.kElevatorYAxis) * Config.kElevatorMultiplier);
+    m_elevator.setSpeed(m_joystick.getRawAxis(Config.kElevatorYAxis) * Config.kElevatorMultiplier);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_elevator.SetSpeed(0);
+    m_elevator.setSpeed(0);
   }
 
   // Returns true when the command should end.
