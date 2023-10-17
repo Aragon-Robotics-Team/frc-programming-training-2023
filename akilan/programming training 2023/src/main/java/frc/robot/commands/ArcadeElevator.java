@@ -10,7 +10,7 @@ import frc.robot.subsystems.Elevator;
 
 public class ArcadeElevator extends CommandBase {
   private static class Config{
-    public static final int kSecondaryY = 92;
+    public static final int kSecondaryY = 5;
     public static final double kSpeedMultiplier = 0.4;
   }
 
