@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.ArcadeElevator;
 import frc.robot.commands.ElevatorMoveForTime;
+import frc.robot.commands.MoveForDistance;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
 
@@ -32,6 +33,8 @@ public class RobotContainer {
   private ArcadeElevator m_arcadeElevator = new ArcadeElevator(m_joystick, m_elevator);
   private ElevatorMoveForTime m_elevatorMoveForTime = new ElevatorMoveForTime(m_elevator, -0.2, 1);
   private JoystickButton m_elevatorMoveForTimeButton = new JoystickButton(m_joystick, Config.kElevatorButton);
+  private MoveForDistance m_moveForDistance = new MoveForDistance (50,m_drivetrain);
+  private JoystickButton m_moveForDistanceButton = new JoystickButton(m_joystick, Config.kElevatorButton);
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -51,6 +54,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
     m_elevatorMoveForTimeButton.onTrue(m_elevatorMoveForTime);
+    m_moveForDistanceButton.onTrue(m_moveForDistance);
   }
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     
