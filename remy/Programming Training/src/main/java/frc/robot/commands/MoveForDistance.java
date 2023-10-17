@@ -14,21 +14,20 @@ import frc.robot.subsystems.Drivetrain;
 public class MoveForDistance extends CommandBase {
   private static final class Config{
     private static final double m_ceaseAndDesist = 0.2; /* what percentaeg of the distance should be slowing down */
-    private static final double m_whealDiameter = 12; /* measured in standard over yonders */
-    private static final double m_whealCircumference = m_whealDiameter * Math.PI;
-    private static final double kGoFast = 20;
-    private static final double kGoSlow = 5;
+    private static final double m_wheelDiameter = 12; /* measured in standard over yonders */
+    private static final double m_ticksPerRevolutions = 2048;
+    private static final double kGoFast = 0.5;
+    private static final double kGoSlow = 0.2;
   }
   private Drivetrain m_drivetrain;
   private double m_goal;
   private double m_currentPosition;
-  private double m_whealDiameter;
   private double m_gottaGoFast;
   private double m_initialPosition;
   /** Creates a new MoveForDistance. */
   public MoveForDistance(Drivetrain drivetrain, double goal) { /* goal */
     m_drivetrain = drivetrain;
-    m_goal = goal;
+    m_goal = (goal/(Config.m_wheelDiameter * Math.PI)) * 2048;
 
   }
 

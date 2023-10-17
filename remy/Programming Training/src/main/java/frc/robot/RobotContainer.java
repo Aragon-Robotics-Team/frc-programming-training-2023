@@ -8,9 +8,11 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.ArcadeElevator;
 import frc.robot.commands.ElevatorMoveForTime;
+import frc.robot.commands.MoveForDistance;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PS4Controller.Button;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -26,6 +28,7 @@ public class RobotContainer {
   private static final class Config{
     public static final int kPort = 0; 
     public static final int kJoystickButtonPort = 1;
+    public static final int kMoveForDistanceButtonPort = 2;
   }
   private Joystick m_joystick = new Joystick(Config.kPort);
   private Drivetrain m_driveTrain = new Drivetrain();
@@ -34,6 +37,8 @@ public class RobotContainer {
   private ArcadeDrive m_arcadeDrive = new ArcadeDrive(m_joystick, m_driveTrain);
   private ElevatorMoveForTime m_elevatorMoveForTime = new ElevatorMoveForTime(m_elevator, 0.2, 1);
   private JoystickButton m_elevatorMoveForTimeButton = new JoystickButton(m_joystick, Config.kJoystickButtonPort);
+  private JoystickButton m_moveForDistanceButton = new JoystickButton(m_joystick, Config.kMoveForDistanceButtonPort);
+  private MoveForDistance m_moveForDistance = new MoveForDistance(m_driveTrain, 50);
   
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -54,6 +59,7 @@ public class RobotContainer {
   private void configureBindings() {
 
     m_elevatorMoveForTimeButton.onTrue(m_elevatorMoveForTime);
+    m_moveForDistanceButton.onTrue(m_moveForDistance);
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
    }
@@ -66,7 +72,6 @@ public class RobotContainer {
 
 
   public Command getAutonomousCommand() {
-    // An example command will be run in autonomous
 
     return null;
   }
