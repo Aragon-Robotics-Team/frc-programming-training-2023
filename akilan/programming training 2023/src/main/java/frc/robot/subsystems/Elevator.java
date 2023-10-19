@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkMaxRelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -16,6 +17,10 @@ public class Elevator extends SubsystemBase {
   }
   private CANSparkMax m_elevatorMotor = new CANSparkMax(Config.motorID, MotorType.kBrushless);
   public Elevator() {}
+
+  public double getDistance(){
+    return m_elevatorMotor.getEncoder().getPosition();
+  }
 
   public void setSpeed(double speed){
     m_elevatorMotor.set(speed);
