@@ -4,14 +4,20 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxAbsoluteEncoder;
+import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
 public class Elevator extends SubsystemBase {
   private static final class Config{
@@ -19,6 +25,7 @@ public class Elevator extends SubsystemBase {
   }
   /** Creates a new Elevator. */
   private CANSparkMax m_elevator = new CANSparkMax(Config.deviceId, MotorType.kBrushless);
+  private RelativeEncoder m_elevatorEncoder = m_elevator.getEncoder();
 
 
   public Elevator() {
@@ -28,6 +35,16 @@ public class Elevator extends SubsystemBase {
   public void setSpeed(double speed) {
     m_elevator.set(speed);
   }
+
+  public double getPosition() {
+    return m_elevatorEncoder.getPosition();
+
+  }
+
+  public double getConversionFactor() {
+    return m_elevatorEncoder.getPositionConversionFactor();
+  }
+
 /**
   public void SetNeutralMode(IdleMode neutralMode) {
     
