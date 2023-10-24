@@ -48,6 +48,7 @@ public class ElevatorPID extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    return m_goal <= Math.abs(0.005);
     
   }
 }
