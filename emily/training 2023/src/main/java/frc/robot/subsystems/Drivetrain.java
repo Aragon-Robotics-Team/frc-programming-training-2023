@@ -31,6 +31,12 @@ public class Drivetrain extends SubsystemBase {
   public void setRightSpeed(double rightSpeed) {
     m_rightPrimary.set(rightSpeed);
   }
+  public double getRightTicks() {
+    return m_rightPrimary.getSelectedSensorPosition();
+  }
+  public double getLeftTicks() {
+    return m_leftPrimary.getSelectedSensorPosition();
+  }
   public void setLeftSpeed(double leftSpeed){
     m_leftPrimary.set(leftSpeed);
   }

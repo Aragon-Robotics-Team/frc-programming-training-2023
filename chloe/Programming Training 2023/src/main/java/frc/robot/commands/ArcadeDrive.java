@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
@@ -32,12 +33,13 @@ public class ArcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double speed = m_joystick.getRawAxis(Config.kLeftStickY) * Config.kSpeedMultiplier;
-    double turn = m_joystick.getRawAxis(Config.kRightStickX) * Config.kTurnMultiplier;
+    double speed = -m_joystick.getRawAxis(Config.kLeftStickY) * Config.kSpeedMultiplier;
+    double turn = -m_joystick.getRawAxis(Config.kRightStickX) * Config.kTurnMultiplier;
     double left = speed + turn;
     double right = speed - turn;
     m_drivetrain.setRightSpeed(right);
     m_drivetrain.setLeftSpeed(left);
+    SmartDashboard.putNumber("Right ticks", m_drivetrain.getRightTicks());
   }
 
   // Called once the command ends or is interrupted.

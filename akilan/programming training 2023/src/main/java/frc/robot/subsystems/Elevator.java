@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Elevator extends SubsystemBase {
   /** Creates a new Elevator. */
-  private static class Config{
-    public static int motorID = 5;
+  private static final class Config{
+    public static final int motorID = 5;
   }
   private CANSparkMax m_elevatorMotor = new CANSparkMax(Config.motorID, MotorType.kBrushless);
   public Elevator() {}

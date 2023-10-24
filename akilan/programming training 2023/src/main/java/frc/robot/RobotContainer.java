@@ -25,7 +25,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   private static final class Config{
-    public static final int kJoystickPort = 1;
+    public static final int kJoystickPort = 0;
     public static final int kJoystickButtonPort = 1;
     public static final int kJoystickButtonPort2 = 2;
   }
@@ -34,7 +34,7 @@ public class RobotContainer {
   private ArcadeDrive m_arcadeDrive = new ArcadeDrive(m_joystick, m_drivetrain);
   private Elevator m_elevator = new Elevator();
   private ArcadeElevator m_arcadeElevator = new ArcadeElevator(m_joystick, m_elevator);
-  private ElevatorMoveForTime m_elevatorMoveForTime = new ElevatorMoveForTime(m_elevator, 0.2, 1);
+  private ElevatorMoveForTime m_elevatorMoveForTime = new ElevatorMoveForTime(m_elevator, -0.2, 1);
   private MoveWithPID m_moveWithPID = new MoveWithPID(m_elevator, 3.1);
   private JoystickButton m_elevatorButton = new JoystickButton(m_joystick, Config.kJoystickButtonPort);
   private JoystickButton m_elevatorPID = new JoystickButton(m_joystick, Config.kJoystickButtonPort2);
@@ -75,7 +75,7 @@ public class RobotContainer {
 
   public Command getTeleopCommand(){
     m_drivetrain.setDefaultCommand(m_arcadeDrive);
-    m_elevator.setDefaultCommand(m_arcadeElevator);
+    m_arcadeElevator.schedule();
     return null;
   }
 }

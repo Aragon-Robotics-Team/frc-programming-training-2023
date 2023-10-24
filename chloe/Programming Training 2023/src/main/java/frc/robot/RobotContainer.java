@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.ArcadeElevator;
 import frc.robot.commands.ElevatorMoveForTime;
+import frc.robot.commands.MoveForDistance;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
 
@@ -21,8 +22,9 @@ import frc.robot.subsystems.Elevator;
  */
 public class RobotContainer {
   private static final class Config{
-    public static final int kJoystickPort = 1;
+    public static final int kJoystickPort = 0;
     public static final int kElevatorButton = 1;
+    public static final int kPIDButton = 2;
   }
   // The robot's subsystems and commands are defined here...
   private Joystick m_joystick = new Joystick(Config.kJoystickPort);
@@ -30,8 +32,13 @@ public class RobotContainer {
   private Elevator m_elevator = new Elevator();
   private ArcadeDrive m_arcadeDrive = new ArcadeDrive(m_joystick,m_drivetrain);
   private ArcadeElevator m_arcadeElevator = new ArcadeElevator(m_joystick, m_elevator);
-  private ElevatorMoveForTime m_elevatorMoveForTime = new ElevatorMoveForTime(m_elevator, 0.2, 1);
+  private ElevatorMoveForTime m_elevatorMoveForTime = new ElevatorMoveForTime(m_elevator, -0.2, 1);
   private JoystickButton m_elevatorMoveForTimeButton = new JoystickButton(m_joystick, Config.kElevatorButton);
+  private MoveForDistance m_moveForDistance = new MoveForDistance (50,m_drivetrain);
+  private JoystickButton m_moveForDistanceButton = new JoystickButton(m_joystick, Config.kElevatorButton);
+  
+  private ElevatorPID m_elevatorPID = new elevatorPID(50,m_elevator);
+  private JoystickButton m_elevatorPIDButton = new JoystickButton(m_joystick,Config.kPIDButton);
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -51,6 +58,8 @@ public class RobotContainer {
    */
   private void configureBindings() {
     m_elevatorMoveForTimeButton.onTrue(m_elevatorMoveForTime);
+    m_moveForDistanceButton.onTrue(m_moveForDistance);
+    m_elevatorPIDButton.onTrue(m_elevatorPID);
   }
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     

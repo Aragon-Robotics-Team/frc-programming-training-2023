@@ -4,32 +4,39 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Elevator;
 
-public class ArcadeElevator extends CommandBase {
-  private static final class Config {
-    public static final int kElevatorYAxis = 5;
-    public static final double kElevatorMultiplier = Math.PI/26;
+
+
+public class ElevatorPID extends CommandBase {
+  /** Creates a new ElevatorPID. */
+  public static final class Config{
+    public static final double kP = 0.1;
+    public static final double kI = 0;
+    public static final double kD = 0;
   }
-    private Joystick m_joystick;
-    private Elevator m_elevator;
-  /** Creates a new ArcadeElevator. */
-  public ArcadeElevator(Joystick joystick, Elevator elevator) {
+  
+  private PIDController m_pid = new PIDController(Config.kP, Config.kI, Config.kD);
+  private Elevator m_elevator;
+  private double m_goal;
+
+  public ElevatorPID(double distance,Elevator elevator) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_joystick = joystick;
-    m_elevator = elevator;
+    m_goal = distance; 
+    m_elevator = elevator; 
+    addRequirements(m_elevator);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_elevator.setSpeed(m_joystick.getRawAxis(Config.kElevatorYAxis) * Config.kElevatorMultiplier);
+    m_elevator.setSpeed(m_pid.calculate(m_elevator.getEncoder(), setpoint));
   }
 
   // Called once the command ends or is interrupted.
@@ -41,6 +48,7 @@ public class ArcadeElevator extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return m_goal <= Math.abs(0.005);
+    
   }
 }

@@ -4,67 +4,58 @@
 
 package frc.robot.commands;
 
-
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
-
-public class ArcadeDrive extends CommandBase {
+public class MoveForDistance extends CommandBase {
   private static final class Config{
-    public static final int kLeftYAxis = 1;
-    public static final int kRightXAxis = 4;
-    public static final double kSpeedMultiplier = 0.5;
-    public static final double kTurnMultiplier = 0.5;
-    public static final double kElevatorMultiplier = Math.PI/26;
-
-
+    public static final double kTickPerRevolution = 2048;
+    public static final double kMotorSpeed = 0.4;
+    public static final double kCircumferenceOfWheel = Math.PI *12;
   }
-  private Joystick m_joystick;
   private Drivetrain m_drivetrain;
-
-
-  /** Creates a new ArcadeDrive. */
-  public ArcadeDrive(Joystick joystick, Drivetrain drivetrain) {
+  private double m_goal;
+  private double m_error;
+  private double m_currentPosition;
+  private double m_initialPosition;
+  
+  /** Creates a new MoveForDistance. */
+  public MoveForDistance(double distance, Drivetrain drivetrain) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_joystick = joystick;
+    m_goal = distance;
     m_drivetrain = drivetrain;
     addRequirements(m_drivetrain);
 
-    
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_initialPosition = m_drivetrain.getRightTicks();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double speed = m_joystick.getRawAxis(Config.kRightXAxis) * Config.kSpeedMultiplier;
-    double turn  = m_joystick.getRawAxis(Config.kLeftYAxis) * Config.kTurnMultiplier;
-    double left = speed + turn;
-    double right = speed - turn;
-    m_drivetrain.setLeftSpeed(left);
-    m_drivetrain.setRightSpeed(right);
-    SmartDashboard.putNumber("Left Ticks", m_drivetrain.getLeftPosition());
-    
+    m_currentPosition = m_drivetrain.getRightTicks() - m_initialPosition;
+    m_error = m_goal - m_currentPosition;
+    m_drivetrain.setLeftSpeed(Config.kMotorSpeed);
+    m_drivetrain.setRightSpeed(Config.kMotorSpeed);
   }
-
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_drivetrain.setLeftSpeed(0);
     m_drivetrain.setRightSpeed(0);
-    
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return m_error==0;
+
+  
+    
   }
 }
