@@ -8,6 +8,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.ArcadeElevator;
 import frc.robot.commands.ElevatorMoveForTime;
+import frc.robot.commands.MoveWithPID;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
 import edu.wpi.first.wpilibj.Joystick;
@@ -26,6 +27,7 @@ public class RobotContainer {
   private static final class Config{
     public static final int kJoystickPort = 1;
     public static final int kJoystickButtonPort = 1;
+    public static final int kJoystickButtonPort2 = 2;
   }
   private Drivetrain m_drivetrain = new Drivetrain();
   private Joystick m_joystick = new Joystick(Config.kJoystickPort);
@@ -33,7 +35,9 @@ public class RobotContainer {
   private Elevator m_elevator = new Elevator();
   private ArcadeElevator m_arcadeElevator = new ArcadeElevator(m_joystick, m_elevator);
   private ElevatorMoveForTime m_elevatorMoveForTime = new ElevatorMoveForTime(m_elevator, 0.2, 1);
+  private MoveWithPID m_moveWithPID = new MoveWithPID(m_elevator, 3.1);
   private JoystickButton m_elevatorButton = new JoystickButton(m_joystick, Config.kJoystickButtonPort);
+  private JoystickButton m_elevatorPID = new JoystickButton(m_joystick, Config.kJoystickButtonPort2);
   // The robot's subsystems and commands are defined here...
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -54,6 +58,7 @@ public class RobotContainer {
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     m_elevatorButton.onTrue(m_elevatorMoveForTime);
+    m_elevatorPID.onTrue(m_moveWithPID);
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
@@ -65,7 +70,7 @@ public class RobotContainer {
    * @return the command to run in autonomous 
    */
   public Command getAutonomousCommand() {
-    return m_elevatorMoveForTime;
+    return null;
   }
 
   public Command getTeleopCommand(){
