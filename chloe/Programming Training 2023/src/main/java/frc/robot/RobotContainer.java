@@ -24,6 +24,7 @@ public class RobotContainer {
   private static final class Config{
     public static final int kJoystickPort = 0;
     public static final int kElevatorButton = 1;
+    public static final int kPIDButton = 2;
   }
   // The robot's subsystems and commands are defined here...
   private Joystick m_joystick = new Joystick(Config.kJoystickPort);
@@ -35,6 +36,9 @@ public class RobotContainer {
   private JoystickButton m_elevatorMoveForTimeButton = new JoystickButton(m_joystick, Config.kElevatorButton);
   private MoveForDistance m_moveForDistance = new MoveForDistance (50,m_drivetrain);
   private JoystickButton m_moveForDistanceButton = new JoystickButton(m_joystick, Config.kElevatorButton);
+  
+  private ElevatorPID m_elevatorPID = new elevatorPID(50,m_elevator);
+  private JoystickButton m_elevatorPIDButton = new JoystickButton(m_joystick,Config.kPIDButton);
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -55,6 +59,7 @@ public class RobotContainer {
   private void configureBindings() {
     m_elevatorMoveForTimeButton.onTrue(m_elevatorMoveForTime);
     m_moveForDistanceButton.onTrue(m_moveForDistance);
+    m_elevatorPIDButton.onTrue(m_elevatorPID);
   }
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     

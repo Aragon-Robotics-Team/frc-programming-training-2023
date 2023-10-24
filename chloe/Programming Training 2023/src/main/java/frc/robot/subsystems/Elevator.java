@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -15,8 +16,7 @@ public class Elevator extends SubsystemBase {
   }
   /** Creates a new Elevator. */
   private CANSparkMax m_elevator = new CANSparkMax(Config.deviceId, MotorType.kBrushless);
-
-
+  
   public Elevator() {
     
   }
@@ -28,7 +28,12 @@ public class Elevator extends SubsystemBase {
   // public void SetNeutralMode(IdleMode neutralMode) {
     
   // }
+  public double getEncoder(){
+    return m_elevator.getEncoder.getPosition();
 
+  }
+
+  
 
 
   @Override
