@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.ArcadeElevator;
 import frc.robot.commands.ElevatorMoveForTime;
+import frc.robot.commands.ElevatorPID;
 import frc.robot.commands.MoveForDistance;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
@@ -25,6 +26,7 @@ public class RobotContainer {
     public static final int kJoystickPort = 1;
     public static final int kElevatorButton = 1;
     public static final int kMoveForDistanceButton = 2;
+    public static final int kElevatorPIDButton = 3;
   }
   // The robot's subsystems and commands are defined here...
   private Joystick m_joystick = new Joystick(Config.kJoystickPort);
@@ -36,6 +38,8 @@ public class RobotContainer {
   private JoystickButton m_elevatorMoveForTimeButton = new JoystickButton(m_joystick, Config.kElevatorButton);
   private MoveForDistance m_moveForDistance = new MoveForDistance(m_drivetrain, 50);
   private JoystickButton m_moveForDistanceButton = new JoystickButton(m_joystick, Config.kMoveForDistanceButton);
+  private JoystickButton m_elevatorPIDButton = new JoystickButton(m_joystick, Config.kElevatorPIDButton);
+  private ElevatorPID m_elevatorPID = new ElevatorPID(m_elevator, 50);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -54,6 +58,7 @@ public class RobotContainer {
   private void configureBindings() {
     m_elevatorMoveForTimeButton.onTrue(m_elevatorMoveForTime);
     m_moveForDistanceButton.onTrue(m_moveForDistance);
+    m_elevatorPIDButton.onTrue(m_elevatorPID);
   }
 
   /**
