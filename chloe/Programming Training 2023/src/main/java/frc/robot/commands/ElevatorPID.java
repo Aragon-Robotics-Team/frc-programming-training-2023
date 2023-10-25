@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Elevator;
 
@@ -36,7 +37,7 @@ public class ElevatorPID extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_elevator.setSpeed(m_pid.calculate(m_elevator.getEncoder(), setpoint));
+    m_elevator.setSpeed(m_pid.calculate(m_elevator.getEncoder(), m_goal));
   }
 
   // Called once the command ends or is interrupted.

@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.ArcadeElevator;
 import frc.robot.commands.ElevatorMoveForTime;
+import frc.robot.commands.ElevatorPID;
 import frc.robot.commands.MoveForDistance;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
@@ -37,7 +38,7 @@ public class RobotContainer {
   private MoveForDistance m_moveForDistance = new MoveForDistance (50,m_drivetrain);
   private JoystickButton m_moveForDistanceButton = new JoystickButton(m_joystick, Config.kElevatorButton);
   
-  private ElevatorPID m_elevatorPID = new elevatorPID(50,m_elevator);
+  private ElevatorPID m_elevatorPID = new ElevatorPID(50,m_elevator);
   private JoystickButton m_elevatorPIDButton = new JoystickButton(m_joystick,Config.kPIDButton);
   
 
