@@ -24,6 +24,9 @@ public class Elevator extends SubsystemBase {
   public void setSpeed(double speed) {
     m_elevator.set(speed);
   }
+  public double getElevatorPosition() {
+    return m_elevator.getEncoder().getPosition();
+  }
   // public void SetNeutralMode(IdleMode neutralMode) {
 
   // }
